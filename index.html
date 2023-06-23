@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+
+        <meta charset="utf-8">
+        <title>JavaScript Jam Quiz</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="Develop/Assets/style.css">
+
+    </head>
+
+    <body>
+        <div>
+            <p>View High Scores</p>
+            <p>Timer:</p>
+        </div>
+
+        <div id="start-container">
+            <h1>Welcome to the JavaScript Jam Quiz</h1>
+            <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score and time will decrease by ten seconds.</p>
+            <input type="text" id="name-input" placeholder="Enter your name">
+            <button>Begin Quiz</button>
+        </div>
+
+        <div id="quiz-container" style="display: none;">
+            <h2 id="timer"></h2>
+            <h2 id="question"></h2>
+            <ul id="choices"></ul>
+            <button>Next</button>
+        </div>
+        
+        <div id="result-container" style="display: none;">
+            <h1>Your Results</h1>
+            <h2 id="score"></h2>
+        </div>
+
+        <script src="Develop/Assets/script.js"></script>
+
+    </body>
+</html>
