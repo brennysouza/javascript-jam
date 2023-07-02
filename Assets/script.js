@@ -12,7 +12,7 @@ const questions = [
         answer: "It specifies the layout of webpages"
     },
     {
-        questions: "3. What does CSS stand for?",
+        question: "3. What does CSS stand for?",
         choices: ["Cascading Style Sheets", "Code Simple Styling", "Central Standard Style", "Color Style Sheets"],
         answer: "Cascading Style Sheets"
     },
@@ -22,17 +22,17 @@ const questions = [
         answer: "line"
     },
     {
-        questions: "5. JavaScript is used for what in an application?",
+        question: "5. JavaScript is used for what in an application?",
         choices: ["It allows for interaction", "It allows your code to be deployed online", "It allows your styling to come to life", "It is the AI working behind the scenes"],
         answer: "It allows for interaction" 
     },
     {
-        questions: "6. Which of the following is not a JavaScript variable?",
+        question: "6. Which of the following is not a JavaScript variable?",
         choices: ["var", "const", "let", "set"],
         answer: "set"
     },
     {
-        questions: "7. The following is considered what? (const name = [item1, item2, item3];",
+        question: "7. The following is considered what? (const name = [item1, item2, item3];",
         choices: ["array", "string", "data set", "javascript cluster"],
         answer: "array"
     }
