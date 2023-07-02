@@ -16,8 +16,10 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 50px;
+    /* padding: 50px; */
     font-size: 20px;
+    margin-left: 30px;
+    margin-right: 30px;   
 }
 
 #score {
@@ -28,6 +30,10 @@ body {
     text-align: center;
 }
 
+span {
+    color: blueviolet;
+}
+
 .start-container, h1, p, button {
     margin: 20px 0 40px;
 }
@@ -36,11 +42,16 @@ body {
     font-size: 40px;
 }
 
+.start-container h2{
+    margin: 30px;
+}
+
 .start-container p{
     font-size: 20px;
     margin: -3px;
 }
 
+/* This is the blue button found in the starting screen that says "Begin Quiz" */
 .start-container button{
     font-size: 20px;
     border-radius: 7px;
