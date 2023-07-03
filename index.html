@@ -14,7 +14,7 @@
         <!-- This is the header or nav bar found at the top of the page where users can access the leaderboard as well as see the timer. -->
         <header>
             <nav class="top-bar">
-                <a id="score">View High Scores</a>
+                <a onclick="viewLeaderboard()">View Leaderboard</a>
                 <div id="timer">Timer: 0</div>
             </nav>    
         </header>
@@ -46,12 +46,12 @@
             </section>
 
             <section>
-                <div id="result-container" style="display: none;">
+                <div id="Results" style="display: none;">
                     <h1>Your Results</h1>
                     <h2 id="score"></h2>
                 </div>
             </section>
-
+        </main>
         <script src="Assets/script.js"></script>
 
     </body>

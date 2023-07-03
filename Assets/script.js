@@ -2,10 +2,30 @@
 // Look into functions
 // Look into conditional statements
 
+var startbuttonEl = document.getElementById("startbutton");
+
+var timerEl = document.getElementById("timer");
+var questionEl = document.getElementById("question");
+var choicesEl = document.getElementById("choices");
+var optionAEl = document.getElementById("optionA"); 
+var optionBEl = document.getElementById("optionB"); 
+var optionCEl = document.getElementById("optionC"); 
+var optionDEl = document.getElementById("optionD"); 
+
+var resultsEl = document.getElementById("results");
+var scoreEl = document.getElementById("score");
+
+
+
 var beginQuiz = document.querySelector("#startbutton");
 
+document.getElementById("startbutton").addEventListener("click", beginQuiz);
+function beginQuiz {
+
+}
+
+
 // May delete this code below. I dont think we will need it. 
-// const startBtn = document.getElementById("startBtn");
 // startBtn.addEventListener("click", beginQuiz);
 
 // The following code represents the questions and answers for the quiz.
