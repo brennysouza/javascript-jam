@@ -1,5 +1,8 @@
 
-var startBtn = document.querySelector("#start");
+var startBtn = document.querySelector("#startbutton");
+
+const startBtn = document.getElementById("startBtn")
+startBtn = addEventListener("click", beginQuiz)
 
 // The following code represents the questions and answers for the quiz.
 const questions = [
