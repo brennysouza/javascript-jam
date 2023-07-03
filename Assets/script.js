@@ -1,8 +1,12 @@
+// Look into variables
+// Look into functions
+// Look into conditional statements
 
-var startBtn = document.querySelector("#startbutton");
+var beginQuiz = document.querySelector("#startbutton");
 
-const startBtn = document.getElementById("startBtn")
-startBtn = addEventListener("click", beginQuiz)
+// May delete this code below. I dont think we will need it. 
+// const startBtn = document.getElementById("startBtn");
+// startBtn.addEventListener("click", beginQuiz);
 
 // The following code represents the questions and answers for the quiz.
 const questions = [

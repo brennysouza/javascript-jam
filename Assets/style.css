@@ -22,6 +22,10 @@ body {
     margin-right: 30px;   
 }
 
+.top-bar, #score, #timer{
+    margin: 10px;
+}
+
 #score {
     color: blue;
 }
@@ -35,7 +39,7 @@ span {
 }
 
 .start-container, h1, p, button {
-    margin: 20px 0 40px;
+    margin: 80px 0 40px;
 }
 
 .start-container h1{
