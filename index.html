@@ -11,31 +11,41 @@
     </head>
 
     <body>
-        <div class="top-bar">
-            <p id="score">View High Scores</p>
-            <p>Timer: 0</p>
-        </div>
 
-        <div class="start-container">
-            <h1>Welcome to the JavaScript <span>Jam</span> Quiz</h1>
-            <h2>Test your HTML, CSS, and JavaScript knowledge!</h2>
-            <p>Try to answer the following code-related questions within the time limit.</p>
-            <p>Keep in mind that incorrect answers will penalize your score and time will decrease by ten seconds.</p>
-            <!-- <input type="text" id="name-input" placeholder="Enter your name"> -->
-            <button id="start" class="btn">Begin Quiz</button>
-        </div>
+        <header class="top-bar">
+            <nav>
+                <p id="score">View High Scores</p>
+                <p>Timer: 0</p>
+            </nav>    
+        </header>
 
-        <div id="quiz-container" style="display: none;">
-            <h2 id="timer"></h2>
-            <h2 id="question"></h2>
-            <ul id="choices"></ul>
-            <button>Next</button>
-        </div>
-        
-        <div id="result-container" style="display: none;">
-            <h1>Your Results</h1>
-            <h2 id="score"></h2>
-        </div>
+        <main>
+            <section>
+                <div class="start-container">
+                    <h1>Welcome to the JavaScript <span>Jam</span> Quiz</h1>
+                    <h2>Test your HTML, CSS, and JavaScript knowledge!</h2>
+                    <p>Try to answer the following code-related questions within the time limit.</p>
+                    <p>Keep in mind that incorrect answers will penalize your score and time will decrease by ten seconds.</p>
+                    <!-- <input type="text" id="name-input" placeholder="Enter your name"> -->
+                    <button id="start" class="btn">Begin Quiz</button>
+                </div>
+            </section>
+
+            <section>
+                <div id="quiz-container" style="display: none;">
+                    <h2 id="timer"></h2>
+                    <h2 id="question"></h2>
+                    <ul id="choices"></ul>
+                    <button>Next</button>
+                </div>
+            </section>
+
+            <section>
+                <div id="result-container" style="display: none;">
+                    <h1>Your Results</h1>
+                    <h2 id="score"></h2>
+                </div>
+            </section>
 
         <script src="Assets/script.js"></script>
 
