@@ -1,5 +1,7 @@
-// The following code represents the questions and answers for the quiz.
 
+var startBtn = document.querySelector("#start");
+
+// The following code represents the questions and answers for the quiz.
 const questions = [
     {
         question: "1. What is HTML used for?",
