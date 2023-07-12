@@ -17,11 +17,13 @@ var scoreEl = document.getElementById("score");
 
 
 
-var beginQuiz = document.querySelector("#startbutton");
+const beginQuiz = document.querySelector("#startbutton");
 
 document.getElementById("startbutton").addEventListener("click", beginQuiz);
-function beginQuiz {
 
+function beginQuiz() {
+    document.querySelector(".start-container").style.display = "none";
+    document.getElementById("quiz-container").style.display = "block";
 }
 
 
