@@ -21,11 +21,28 @@ const beginQuiz = document.querySelector("#startbutton");
 
 document.getElementById("startbutton").addEventListener("click", beginQuiz);
 
+// The code below represents the initial time in seconds
+var timeRemaining = 60;
+var timer = 
+
+// The function
 function beginQuiz() {
     document.querySelector(".start-container").style.display = "none";
     document.getElementById("quiz-container").style.display = "block";
+    startTimer();
+    showQuestion();
 }
 
+function startTimer() {
+    timer = setInterval(function() {
+      if (timeRemaining <= 0) {
+        clearInterval(timer);
+        endQuiz();
+      } else {
+        timerEl.textContent = "Timer: " + timeRemaining;
+      }
+    }, 1000);
+  }
 
 // May delete this code below. I dont think we will need it. 
 // startBtn.addEventListener("click", beginQuiz);
