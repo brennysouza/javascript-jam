@@ -23,7 +23,21 @@ document.getElementById("startbutton").addEventListener("click", beginQuiz);
 
 // The code below represents the initial time in seconds
 var timeRemaining = 60;
-var timer = 
+var timer; 
+
+// Code below adds event listeners to each choice button
+optionAEl.addEventListener("click", function() {
+handleAnswer(optionAEl.textContent);
+});
+optionBEl.addEventListener("click", function() {
+handleAnswer(optionBEl.textContent);
+});
+optionCEl.addEventListener("click", function() {
+handleAnswer(optionCEl.textContent);
+});
+optionDEl.addEventListener("click", function() {
+handleAnswer(optionDEl.textContent);
+});
 
 // The function
 function beginQuiz() {
@@ -55,20 +69,6 @@ function showQuestion() {
       optionBEl.textContent = questions[currentQuestion].choices[1];
       optionCEl.textContent = questions[currentQuestion].choices[2];
       optionDEl.textContent = questions[currentQuestion].choices[3];
-  
-      // Code below adds event listeners to each choice button
-      optionAEl.addEventListener("click", function() {
-        handleAnswer(optionAEl.textContent);
-      });
-      optionBEl.addEventListener("click", function() {
-        handleAnswer(optionBEl.textContent);
-      });
-      optionCEl.addEventListener("click", function() {
-        handleAnswer(optionCEl.textContent);
-      });
-      optionDEl.addEventListener("click", function() {
-        handleAnswer(optionDEl.textContent);
-      });
     } else {
       endQuiz();
     }
@@ -128,3 +128,11 @@ const questions = [
         answer: "array"
     }
 ]
+
+// The function code will clear the timer, hide the quiz container, and show the results container with the final score. when the timer runs out or all questions are answered. 
+function endQuiz() {
+    clearInterval(timer);
+    document.getElementById("quiz-container").style.display = "none";
+    document.getElementById("results").style.display = "block";
+    scoreEl.textContent = "Your score: " + score;
+  }
