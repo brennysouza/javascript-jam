@@ -15,12 +15,6 @@ var optionDEl = document.getElementById("optionD");
 var resultsEl = document.getElementById("results");
 var scoreEl = document.getElementById("score");
 
-
-
-var beginQuiz = document.querySelector("#startbutton");
-
-document.getElementById("startbutton").addEventListener("click", beginQuiz);
-
 // The code below represents the initial time in seconds
 var timeRemaining = 60;
 var timer; 
@@ -37,6 +31,9 @@ handleAnswer(optionCEl.textContent);
 });
 optionDEl.addEventListener("click", function() {
 handleAnswer(optionDEl.textContent);
+});
+
+document.getElementById("startbutton").addEventListener("click", function() {beginQuiz();
 });
 
 // The function
