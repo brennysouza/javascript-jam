@@ -2,7 +2,7 @@
 // Look into functions
 // Look into conditional statements
 
-var startbuttonEl = document.getElementById("startbutton");
+// var startbuttonEl = document.getElementById("startbutton");
 
 var timerEl = document.getElementById("timer");
 var questionEl = document.getElementById("question");
@@ -17,7 +17,7 @@ var scoreEl = document.getElementById("score");
 
 
 
-const beginQuiz = document.querySelector("#startbutton");
+var beginQuiz = document.querySelector("#startbutton");
 
 document.getElementById("startbutton").addEventListener("click", beginQuiz);
 
@@ -42,6 +42,49 @@ function startTimer() {
         timerEl.textContent = "Timer: " + timeRemaining;
       }
     }, 1000);
+  }
+
+var currentQuestion = 0;
+var score = 0;
+
+// Function that displays each question with its corresponding options.
+function showQuestion() {
+    if (currentQuestion < questions.length) {
+      questionEl.textContent = questions[currentQuestion].question;
+      optionAEl.textContent = questions[currentQuestion].choices[0];
+      optionBEl.textContent = questions[currentQuestion].choices[1];
+      optionCEl.textContent = questions[currentQuestion].choices[2];
+      optionDEl.textContent = questions[currentQuestion].choices[3];
+  
+      // Code below adds event listeners to each choice button
+      optionAEl.addEventListener("click", function() {
+        handleAnswer(optionAEl.textContent);
+      });
+      optionBEl.addEventListener("click", function() {
+        handleAnswer(optionBEl.textContent);
+      });
+      optionCEl.addEventListener("click", function() {
+        handleAnswer(optionCEl.textContent);
+      });
+      optionDEl.addEventListener("click", function() {
+        handleAnswer(optionDEl.textContent);
+      });
+    } else {
+      endQuiz();
+    }
+  }
+
+//   The code below allows users to obtain points when the correct answer is chosen per question. The else takes off 10 seconds from the countdown if users choose any wrong answer. 
+  function handleAnswer(selectedAnswer) {
+    var correctAnswer = questions[currentQuestion].answer;
+    if (selectedAnswer === correctAnswer) {
+      score++;
+    } else {
+      timeRemaining -= 10;
+    }
+  
+    currentQuestion++;
+    showQuestion();
   }
 
 // May delete this code below. I dont think we will need it. 
