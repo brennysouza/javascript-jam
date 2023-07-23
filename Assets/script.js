@@ -33,11 +33,14 @@ optionDEl.addEventListener("click", function() {
 handleAnswer(optionDEl.textContent);
 });
 
-document.getElementById("startbutton").addEventListener("click", function() {beginQuiz();
+document.getElementById("startbutton").addEventListener("click", function() {
+  console.log(beginQuiz);
+  beginQuiz();
 });
 
-// The function
+// The function below begines the quiz 
 function beginQuiz() {
+  console.log(beginQuiz);
     document.querySelector(".start-container").style.display = "none";
     document.getElementById("quiz-container").style.display = "block";
     startTimer();
@@ -45,12 +48,14 @@ function beginQuiz() {
 }
 
 function startTimer() {
+  console.log(startTimer);
     timer = setInterval(function() {
       if (timeRemaining <= 0) {
         clearInterval(timer);
         endQuiz();
       } else {
         timerEl.textContent = "Timer: " + timeRemaining;
+        timeRemaining--;
       }
     }, 1000);
   }
@@ -83,9 +88,6 @@ function showQuestion() {
     currentQuestion++;
     showQuestion();
   }
-
-// May delete this code below. I dont think we will need it. 
-// startBtn.addEventListener("click", beginQuiz);
 
 // The following code represents the questions and answers for the quiz.
 const questions = [
