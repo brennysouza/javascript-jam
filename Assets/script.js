@@ -136,4 +136,17 @@ function endQuiz() {
     scoreEl.textContent = "Your score: " + score;
   }
 
-  
+  // THis code represents variables created specicifically to target the html tages pertaining to the final stage of the quiz.
+  var finalScoreEl = document.getElementById("score");
+  var nameInputEl = document.getElementById("input-name");
+  var submitScore = document.getElementById("scoreButton");
+
+  submitScore.addEventListener("click", function () {
+    var playerName = nameInputEl.ariaValueMax.trim();
+    if (playerName !== "") {
+      saveScore(playerName, score);
+      displayScore();
+    } else {
+      alert("Please Enter Your Name Before Submitting Your Score");
+    }
+  });
