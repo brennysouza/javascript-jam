@@ -89,18 +89,33 @@ function showQuestion() {
     }
   }
 
+  var alertAnswer = "";
+
 //   The code below allows users to obtain points when the correct answer is chosen per question. The else takes off 10 seconds from the countdown if users choose any wrong answer. 
   function handleAnswer(selectedAnswer) {
     var correctAnswer = questions[currentQuestion].answer;
     if (selectedAnswer === correctAnswer) {
       score++;
+      showFeedback("Correct!", 1200);
     } else {
       timeRemaining -= 10;
+      showFeedback("Wrong!", 1200);
     }
   
     currentQuestion++;
     showQuestion();
+
   }
+
+// The following code allows the message of right or wrong to display when users answer a question.
+
+function showFeedback(message, duration) {
+  var alertEl = document.getElementById("alert");
+  alertEl.textContent = message;
+  setTimeout(function () {
+    alertEl.textContent = "";
+  }, duration);
+}
 
 // The following code represents the questions and answers for the quiz.
 const questions = [
@@ -140,6 +155,9 @@ const questions = [
         answer: "array"
     }
 ]
+
+
+
 
 // The function code will clear the timer, hide the quiz container, and show the results container with the final score. when the timer runs out or all questions are answered. 
 function endQuiz() {
