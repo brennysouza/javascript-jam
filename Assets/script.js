@@ -156,3 +156,13 @@ function endQuiz() {
     var userScore = JSON.parse(localStorage.getItem("userScore") || "[]"); userScore.push({ name: name, score: score });
     localStorage.setItem("userScore", JSON.stringify(userScore));
   }
+
+  function displayScore() {
+    var userScore = JSON.parse(localStorage.getItem("userScore") || "[]"); 
+    var scoreboardHTML = "<h1>Scoreboard</h1><ul>";
+    userScore.forEAch(function (player, index) {
+      scoreboardHTML += "<li>" + player.name + ": " + player.score + "</li>";
+    });
+    scoreboardHTML += "</ul>"
+    document.getElementById("scoreboard").innerHTML = scoreboardHTML;
+  }
