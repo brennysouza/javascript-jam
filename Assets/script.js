@@ -4,7 +4,7 @@
 
 // var startbuttonEl = document.getElementById("startbutton");
 
-var timerEl = document.getElementById("timer");
+var timerCountEl = document.getElementById("timer");
 var questionEl = document.getElementById("question");
 var choicesEl = document.getElementById("choices");
 var optionAEl = document.getElementById("optionA"); 
@@ -57,6 +57,9 @@ function beginQuiz() {
     showQuestion();
 }
 
+var timerCountEl = document.getElementById("timerCount");
+var leaderboardScoresEl = document.getElementById("leaderboard-scores");
+
 function startTimer() {
   console.log(startTimer);
     timer = setInterval(function() {
@@ -64,7 +67,7 @@ function startTimer() {
         clearInterval(timer);
         endQuiz();
       } else {
-        timerEl.textContent = "Timer: " + timeRemaining;
+        timerCountEl.textContent = timeRemaining;
         timeRemaining--;
       }
     }, 1000);
@@ -158,12 +161,12 @@ function endQuiz() {
 
   function displayScore() {
     var userScore = JSON.parse(localStorage.getItem("userScore") || "[]"); 
-    var scoreboardHTML = "<h1>Scoreboard</h1><ul>";
+    var leaderboardHTML = "<h1>Scoreboard</h1><ul>";
     userScore.forEach(function (player, index) {
-      scoreboardHTML += "<li>" + player.name + ": " + player.score + "</li>";
+      leaderboardHTML += "<li>" + player.name + ": " + player.score + "</li>";
     });
-    scoreboardHTML += "</ul>"
-    document.getElementById("scoreboard").innerHTML = scoreboardHTML;
+    leaderboardHTML += "</ul>"
+    leaderboardScoresEl.innerHTML = leaderboardHTML;
   }
 
   submitScore.addEventListener("click", function () {
