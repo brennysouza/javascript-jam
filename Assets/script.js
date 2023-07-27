@@ -38,7 +38,6 @@ handleAnswer(optionDEl.textContent);
 });
 
 document.getElementById("startbutton").addEventListener("click", function() {
-  console.log(beginQuiz);
   beginQuiz();
 });
 
@@ -54,7 +53,6 @@ viewLeaderBoard.addEventListener("click", function () {
 
 // The function below begines the quiz 
 function beginQuiz() {
-  console.log(beginQuiz);
     document.querySelector(".start-container").style.display = "none";
     document.getElementById("quiz-container").style.display = "block";
     startTimer();
@@ -65,7 +63,6 @@ var timerCountEl = document.getElementById("timerCount");
 var leaderboardScoresEl = document.getElementById("leaderboard-scores");
 
 function startTimer() {
-  console.log(startTimer);
     timer = setInterval(function() {
       if (timeRemaining <= 0) {
         clearInterval(timer);
@@ -89,21 +86,25 @@ function showQuestion() {
       optionCEl.textContent = questions[currentQuestion].choices[2];
       optionDEl.textContent = questions[currentQuestion].choices[3];
     } else {
-      endQuiz();
+      clearInterval(timer);
+      document.getElementById("quiz-container").style.display = "none";
+      document.getElementById("results").style.display = "block";
+      scoreEl.textContent = "Your score: " + score;
+      showFinalScreen();
     }
   }
 
-  var alertAnswer = "";
+  // var alertAnswer = "";
 
 //   The code below allows users to obtain points when the correct answer is chosen per question. The else takes off 10 seconds from the countdown if users choose any wrong answer. 
   function handleAnswer(selectedAnswer) {
     var correctAnswer = questions[currentQuestion].answer;
     if (selectedAnswer === correctAnswer) {
       score++;
-      showFeedback("Correct!", 1200);
+      showFeedback("Correct!", 1500);
     } else {
       timeRemaining -= 10;
-      showFeedback("Wrong!", 1200);
+      showFeedback("Wrong!", 1500);
     }
   
     currentQuestion++;
@@ -160,16 +161,38 @@ const questions = [
     }
 ]
 
-
-
-
 // The function code will clear the timer, hide the quiz container, and show the results container with the final score. when the timer runs out or all questions are answered. 
 function endQuiz() {
     clearInterval(timer);
     document.getElementById("quiz-container").style.display = "none";
     document.getElementById("results").style.display = "block";
     scoreEl.textContent = "Your score: " + score;
+    showFinalScreen();
   }
+
+  function showFinalScreen() {
+    finalScreenEl.style.display = "block";
+    finalScoreEl.textContent = "Your final score: " + score;
+  }
+
+  goBackEl.addEventListener("click", function () {
+    resetQuiz();
+    finalScreenEl.style.display = "none";
+    document.querySelector(".start-container").style.display = "block";
+  });
+
+  function resetQuiz() {
+    timeRemaining = 60;
+    currentQuestion = 0;
+    score = 0;
+    startTimer();
+    showQuestion();
+  }
+
+  clearScoresEl.addEventListener("click", function () {
+    localStorage.clear();
+    displayScore();
+  })
 
   // THis code represents variables created specicifically to target the html tages pertaining to the final stage of the quiz.
   var finalScoreEl = document.getElementById("score");
@@ -181,15 +204,14 @@ function endQuiz() {
     localStorage.setItem("userScore", JSON.stringify(userScore));
   }
 
-  function displayScore() {
+  function updateScoreboard() {
     document.getElementById("results").style.display = "none";
     document.getElementById("final-screen").style.display = "block";
-    displayScore();
 
     var userName = nameInputEl.value.trim();
-    var userScore = score;
+    // var userScore = score;
     var userScoreHTML = "<h2>Your Score</h2><p>" + userName + ": " + userScore + "</p>";
-    document.getElementById("user-score").innerHTML = userScoreHTML;
+    finalScoreEl.innerHTML = userScoreHTML;
 
     var userScore = JSON.parse(localStorage.getItem("userScore") || "[]"); 
     var leaderboardHTML = "<h1>Scoreboard</h1><ul>";
@@ -204,7 +226,7 @@ function endQuiz() {
     var userName = nameInputEl.value.trim();
     if (userName !== "") {
       saveScore(userName, score);
-      displayScore();
+      updateScoreboard();
     } else {
       alert ("Please Enter Your Name To Submit Score");
     }
