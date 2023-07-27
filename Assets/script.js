@@ -4,7 +4,7 @@
 
 // var startbuttonEl = document.getElementById("startbutton");
 
-var timerCountEl = document.getElementById("timer");
+var timerCountEl = document.getElementById("timerCount");
 var questionEl = document.getElementById("question");
 var choicesEl = document.getElementById("choices");
 var optionAEl = document.getElementById("optionA"); 
@@ -14,6 +14,10 @@ var optionDEl = document.getElementById("optionD");
 
 var resultsEl = document.getElementById("results");
 var scoreEl = document.getElementById("score");
+var finalScreenEl = document.getElementById("final-screen");
+var finalScoreEl = document.getElementById("final-score");
+var goBackEl = document.getElementById("goBack");
+var clearScoresEl = document.getElementById("clearScores");
 
 // The code below represents the initial time in seconds
 var timeRemaining = 60;
@@ -178,6 +182,15 @@ function endQuiz() {
   }
 
   function displayScore() {
+    document.getElementById("results").style.display = "none";
+    document.getElementById("final-screen").style.display = "block";
+    displayScore();
+
+    var userName = nameInputEl.value.trim();
+    var userScore = score;
+    var userScoreHTML = "<h2>Your Score</h2><p>" + userName + ": " + userScore + "</p>";
+    document.getElementById("user-score").innerHTML = userScoreHTML;
+
     var userScore = JSON.parse(localStorage.getItem("userScore") || "[]"); 
     var leaderboardHTML = "<h1>Scoreboard</h1><ul>";
     userScore.forEach(function (player, index) {
@@ -196,4 +209,19 @@ function endQuiz() {
       alert ("Please Enter Your Name To Submit Score");
     }
   });
+
+  // Event listener to go back to the main page and start quiz again
+document.getElementById("goBack").addEventListener("click", function () {
+  document.getElementById("final-screen").style.display = "none";
+  document.querySelector(".start-container").style.display = "block";
+  timeRemaining = 60;
+  score = 0;
+  currentQuestion = 0;
+});
+
+// Event listener to clear the leaderboard scores
+document.getElementById("clearScores").addEventListener("click", function () {
+  localStorage.removeItem("userScore");
+  displayScore();
+});
 
