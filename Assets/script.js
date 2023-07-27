@@ -38,6 +38,16 @@ document.getElementById("startbutton").addEventListener("click", function() {
   beginQuiz();
 });
 
+// This code represents an event listener for the begin quiz button
+var startButtonEl = document.getElementById("startbutton");
+startButtonEl.addEventListener("click", beginQuiz);
+
+// This is an event listener for the view leaderboard link in the top nav bar of the quiz
+var viewLeaderBoard = document.getElementById("leaderboard");
+viewLeaderBoard.addEventListener("click", function () {
+  displayScore();
+});
+
 // The function below begines the quiz 
 function beginQuiz() {
   console.log(beginQuiz);
@@ -141,17 +151,6 @@ function endQuiz() {
   var nameInputEl = document.getElementById("input-name");
   var submitScore = document.getElementById("scoreButton");
 
-  // This event listerner add logic to the button of the submit score section. Allows it to work and furthermore, will not function if a user DOES NOT add a name to saves score. It is a must. 
-  submitScore.addEventListener("click", function () {
-    var playerName = nameInputEl.ariaValueMax.trim();
-    if (playerName !== "") {
-      saveScore(playerName, score);
-      displayScore();
-    } else {
-      alert("Please Enter Your Name Before Submitting Your Score");
-    }
-  });
-
   function saveScore(name, score) {
     var userScore = JSON.parse(localStorage.getItem("userScore") || "[]"); userScore.push({ name: name, score: score });
     localStorage.setItem("userScore", JSON.stringify(userScore));
@@ -160,9 +159,20 @@ function endQuiz() {
   function displayScore() {
     var userScore = JSON.parse(localStorage.getItem("userScore") || "[]"); 
     var scoreboardHTML = "<h1>Scoreboard</h1><ul>";
-    userScore.forEAch(function (player, index) {
+    userScore.forEach(function (player, index) {
       scoreboardHTML += "<li>" + player.name + ": " + player.score + "</li>";
     });
     scoreboardHTML += "</ul>"
     document.getElementById("scoreboard").innerHTML = scoreboardHTML;
   }
+
+  submitScore.addEventListener("click", function () {
+    var userName = nameInputEl.value.trim();
+    if (userName !== "") {
+      saveScore(userName, score);
+      displayScore();
+    } else {
+      alert ("Please Enter Your Name To Submit Score");
+    }
+  });
+
