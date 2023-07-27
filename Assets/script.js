@@ -141,6 +141,7 @@ function endQuiz() {
   var nameInputEl = document.getElementById("input-name");
   var submitScore = document.getElementById("scoreButton");
 
+  // This event listerner add logic to the button of the submit score section. Allows it to work and furthermore, will not function if a user DOES NOT add a name to saves score. It is a must. 
   submitScore.addEventListener("click", function () {
     var playerName = nameInputEl.ariaValueMax.trim();
     if (playerName !== "") {
@@ -150,3 +151,8 @@ function endQuiz() {
       alert("Please Enter Your Name Before Submitting Your Score");
     }
   });
+
+  function saveScore(name, score) {
+    var userScore = JSON.parse(localStorage.getItem("userScore") || "[]"); userScore.push({ name: name, score: score });
+    localStorage.setItem("userScore", JSON.stringify(userScore));
+  }
