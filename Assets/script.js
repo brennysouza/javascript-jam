@@ -135,3 +135,5 @@ function endQuiz() {
     document.getElementById("results").style.display = "block";
     scoreEl.textContent = "Your score: " + score;
   }
+
+  
