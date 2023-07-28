@@ -65,3 +65,8 @@ span {
     background-color: blue;
     color: white;
 }
+
+/* This targerts the javascript code in the js file with a css class attribute of hidden */
+.hidden {
+    display: none;
+}

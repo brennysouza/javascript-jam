@@ -2,7 +2,7 @@
 // Look into functions
 // Look into conditional statements
 
-// var startbuttonEl = document.getElementById("startbutton");
+var startButtonEl = document.getElementById("startbutton");
 
 var timerCountEl = document.getElementById("timerCount");
 var questionEl = document.getElementById("question");
@@ -42,8 +42,8 @@ document.getElementById("startbutton").addEventListener("click", function() {
 });
 
 // This code represents an event listener for the begin quiz button
-var startButtonEl = document.getElementById("startbutton");
-startButtonEl.addEventListener("click", beginQuiz);
+// var startButtonEl = document.getElementById("startbutton");
+// startButtonEl.addEventListener("click", beginQuiz);
 
 // This is an event listener for the view leaderboard link in the top nav bar of the quiz
 var viewLeaderBoard = document.getElementById("leaderboard");
@@ -57,9 +57,11 @@ function beginQuiz() {
     document.getElementById("quiz-container").style.display = "block";
     startTimer();
     showQuestion();
+    score = 0;
+    finalScreenEl.style.display = "none";
 }
 
-var timerCountEl = document.getElementById("timerCount");
+// var timerCountEl = document.getElementById("timerCount");
 var leaderboardScoresEl = document.getElementById("leaderboard-scores");
 
 function startTimer() {
@@ -167,18 +169,28 @@ function endQuiz() {
     document.getElementById("quiz-container").style.display = "none";
     document.getElementById("results").style.display = "block";
     scoreEl.textContent = "Your score: " + score;
-    showFinalScreen();
+    document.getElementById("input-name").classList.remove("hidden");
+    document.getElementById("scoreButton").classList.remove("hidden");
+    // this code hides the "final-screen" div until the user submits their name
+    finalScreenEl.style.display = "block";
+
   }
 
   function showFinalScreen() {
+    document.getElementById("input-name").classList.add("hidden");
+    document.getElementById("scoreButton").classList.add("hidden");
     finalScreenEl.style.display = "block";
     finalScoreEl.textContent = "Your final score: " + score;
   }
 
   goBackEl.addEventListener("click", function () {
     resetQuiz();
+    document.getElementById("results").style.display = "none";
+    document.getElementById("input-name").classList.add("hidden");
+    document.getElementById("scoreButton").classList.add("hidden");
     finalScreenEl.style.display = "none";
     document.querySelector(".start-container").style.display = "block";
+    
   });
 
   function resetQuiz() {
@@ -205,15 +217,16 @@ function endQuiz() {
   }
 
   function updateScoreboard() {
+    var userName = nameInputEl.value.trim();
+    var userScore = JSON.parse(localStorage.getItem("userScore") || "[]"); 
     document.getElementById("results").style.display = "none";
     document.getElementById("final-screen").style.display = "block";
 
-    var userName = nameInputEl.value.trim();
+    // var userName = nameInputEl.value.trim();
     // var userScore = score;
     var userScoreHTML = "<h2>Your Score</h2><p>" + userName + ": " + userScore + "</p>";
     finalScoreEl.innerHTML = userScoreHTML;
 
-    var userScore = JSON.parse(localStorage.getItem("userScore") || "[]"); 
     var leaderboardHTML = "<h1>Scoreboard</h1><ul>";
     userScore.forEach(function (player, index) {
       leaderboardHTML += "<li>" + player.name + ": " + player.score + "</li>";
@@ -227,6 +240,7 @@ function endQuiz() {
     if (userName !== "") {
       saveScore(userName, score);
       updateScoreboard();
+      showFinalScreen();
     } else {
       alert ("Please Enter Your Name To Submit Score");
     }
@@ -234,11 +248,12 @@ function endQuiz() {
 
   // Event listener to go back to the main page and start quiz again
 document.getElementById("goBack").addEventListener("click", function () {
-  document.getElementById("final-screen").style.display = "none";
+  resetQuiz();
+  finalScreenEl.style.display = "none";
   document.querySelector(".start-container").style.display = "block";
-  timeRemaining = 60;
-  score = 0;
-  currentQuestion = 0;
+  // timeRemaining = 60;
+  // score = 0;
+  // currentQuestion = 0;
 });
 
 // Event listener to clear the leaderboard scores
