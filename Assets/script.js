@@ -18,10 +18,24 @@ var finalScreenEl = document.getElementById("final-screen");
 var finalScoreEl = document.getElementById("final-score");
 var goBackEl = document.getElementById("goBack");
 var clearScoresEl = document.getElementById("clearScores");
+// var finalScoreEl = document.getElementById("score");
+var nameInputEl = document.getElementById("input-name");
+var nameSubmitButtonEl = document.getElementById("name-submit");
 
 // The code below represents the initial time in seconds
 var timeRemaining = 60;
 var timer; 
+
+nameSubmitButtonEl.addEventListener("click", function () {
+  var userName = nameInputEl.value.trim();
+  if (userName !== "") {
+    saveScore(userName, score);
+    updateScoreboard();
+    // showFinalScreen();
+  } else {
+    alert ("Please Enter Your Name To Submit Score");
+  }
+});
 
 // Code below adds event listeners to each choice button
 optionAEl.addEventListener("click", function() {
@@ -37,7 +51,8 @@ optionDEl.addEventListener("click", function() {
 handleAnswer(optionDEl.textContent);
 });
 
-document.getElementById("startbutton").addEventListener("click", function() {
+// document.getElementById("startbutton")
+startButtonEl.addEventListener("click", function() {
   beginQuiz();
 });
 
@@ -46,10 +61,10 @@ document.getElementById("startbutton").addEventListener("click", function() {
 // startButtonEl.addEventListener("click", beginQuiz);
 
 // This is an event listener for the view leaderboard link in the top nav bar of the quiz
-var viewLeaderBoard = document.getElementById("leaderboard");
-viewLeaderBoard.addEventListener("click", function () {
-  displayScore();
-});
+// var viewLeaderBoard = document.getElementById("leaderboard");
+// viewLeaderBoard.addEventListener("click", function () {
+//   displayScore();
+// });
 
 // The function below begines the quiz 
 function beginQuiz() {
@@ -167,30 +182,36 @@ const questions = [
 function endQuiz() {
     clearInterval(timer);
     document.getElementById("quiz-container").style.display = "none";
-    document.getElementById("results").style.display = "block";
-    scoreEl.textContent = "Your score: " + score;
-    document.getElementById("input-name").classList.remove("hidden");
-    document.getElementById("scoreButton").classList.remove("hidden");
+
+    // document.getElementById("results").style.display = "block";
+    // scoreEl.textContent = "Your score: " + score;
+    // document.getElementById("input-name").classList.remove("hidden");
+    // document.getElementById("scoreButton").classList.remove("hidden");
+
     // this code hides the "final-screen" div until the user submits their name
-    finalScreenEl.style.display = "block";
+    // finalScreenEl.style.display = "block";
+    scoreEl.textContent = "Your score: " + score;
+    showFinalScreen();
 
   }
 
   function showFinalScreen() {
-    document.getElementById("input-name").classList.add("hidden");
-    document.getElementById("scoreButton").classList.add("hidden");
-    finalScreenEl.style.display = "block";
-    finalScoreEl.textContent = "Your final score: " + score;
+    document.getElementById("results").style.display = "block";
+    document.getElementById("name-submit").style.display = "block";
+    // document.getElementById("input-name").classList.add("hidden");
+    // document.getElementById("final-screen").style.display = "block";
+    // finalScreenEl.style.display = "block";
+    document.getElementById("final-score").textContent = "Your final score: " + score;
+    document.getElementById("input-name").classList.remove("hidden");
+    document.getElementById("goBack").style.display = "block";
+    document.getElementById("clearScores").style.display = "block";
+    // finalScoreEl.textContent = "Your final score: " + score;
   }
 
-  goBackEl.addEventListener("click", function () {
+  document.getElementById("goBack").addEventListener("click", function () {
     resetQuiz();
-    document.getElementById("results").style.display = "none";
-    document.getElementById("input-name").classList.add("hidden");
-    document.getElementById("scoreButton").classList.add("hidden");
     finalScreenEl.style.display = "none";
     document.querySelector(".start-container").style.display = "block";
-    
   });
 
   function resetQuiz() {
@@ -199,6 +220,9 @@ function endQuiz() {
     score = 0;
     startTimer();
     showQuestion();
+
+    document.getElementById("final-screen").style.display = "none";
+    document.querySelector(".start-container").style.display = "block";
   }
 
   clearScoresEl.addEventListener("click", function () {
@@ -206,10 +230,17 @@ function endQuiz() {
     displayScore();
   })
 
-  // THis code represents variables created specicifically to target the html tages pertaining to the final stage of the quiz.
-  var finalScoreEl = document.getElementById("score");
-  var nameInputEl = document.getElementById("input-name");
-  var submitScore = document.getElementById("scoreButton");
+  // nameSubmitButtonEl.addEventListener("click", function () {
+  //   var userName = nameInputEl.value.trim();
+  //   if (userName !== "") {
+  //     var numericScore = parseInt(score);
+  //     saveScore(userName, score);
+  //     updateScoreboard();
+  //     showFinalScreen();
+  //   } else {
+  //     alert("Please Enter Your Name To Submit Score");
+  //   }
+  // });
 
   function saveScore(name, score) {
     var userScore = JSON.parse(localStorage.getItem("userScore") || "[]"); userScore.push({ name: name, score: score });
@@ -224,7 +255,10 @@ function endQuiz() {
 
     // var userName = nameInputEl.value.trim();
     // var userScore = score;
-    var userScoreHTML = "<h2>Your Score</h2><p>" + userName + ": " + userScore + "</p>";
+    var userScoreHTML = "<h2>Your Score</h2>";
+    userScore.forEach(function (player) {
+      userScoreHTML += "<p>" + player.name + ": " + player.score + "</p>";
+    });
     finalScoreEl.innerHTML = userScoreHTML;
 
     var leaderboardHTML = "<h1>Scoreboard</h1><ul>";
@@ -234,17 +268,6 @@ function endQuiz() {
     leaderboardHTML += "</ul>"
     leaderboardScoresEl.innerHTML = leaderboardHTML;
   }
-
-  submitScore.addEventListener("click", function () {
-    var userName = nameInputEl.value.trim();
-    if (userName !== "") {
-      saveScore(userName, score);
-      updateScoreboard();
-      showFinalScreen();
-    } else {
-      alert ("Please Enter Your Name To Submit Score");
-    }
-  });
 
   // Event listener to go back to the main page and start quiz again
 document.getElementById("goBack").addEventListener("click", function () {
@@ -262,3 +285,19 @@ document.getElementById("clearScores").addEventListener("click", function () {
   displayScore();
 });
 
+document.getElementById("leaderboard").addEventListener("click", function() {
+  displayScore();
+});
+
+function displayScore() {
+  var userScore = JSON.parse(localStorage.getItem("userScore") || "[]");
+  var leaderboardScoresEl = document.getElementById("leaderboard-scores");
+  var leaderboardHTML = "<h1>Scoreboard</h1><ul>";
+
+  userScore.forEach(function (player) {
+    leaderboardHTML += "<li>" + player.name + ": " + player.score + "</li>";
+  });
+
+  leaderboardHTML += "</ul>";
+  leaderboardScoresEl.innerHTML = leaderboardHTML;
+}

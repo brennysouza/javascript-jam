@@ -14,7 +14,7 @@
         <!-- This is the header or nav bar found at the top of the page where users can access the leaderboard as well as see the timer. -->
         <header>
             <nav class="top-bar">
-                <a id="leaderboard" onclick="viewLeaderboard()">View Leaderboard</a>
+                <a id="leaderboard">View Leaderboard</a>
                 <div class="timer">Timer: <span id="timerCount"></span></div>
                 <div id="leaderboard-scores"></div>
             </nav>    
@@ -53,7 +53,7 @@
                     <h1>Your Results</h1>
                     <p>Enter Your Name:</p>
                     <input type="text" id="input-name" placeholder="Enter Your Name">
-                    <button id="scoreButton">Submit Score</button>
+                    <button id="name-submit">Submit</button>
                     <h2 id="score"></h2>
                 </div>
                 <div id="final-screen" style="display: none;">
@@ -67,6 +67,11 @@
                 <div id="scoreboard"></div>
             </section>
         </main>
+        <style>
+            #name-submit {
+              display: none;
+            }
+        </style>
         <script src="Assets/script.js"></script>
 
     </body>
