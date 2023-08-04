@@ -18,7 +18,6 @@ var finalScreenEl = document.getElementById("final-screen");
 var finalScoreEl = document.getElementById("final-score");
 var goBackEl = document.getElementById("goBack");
 var clearScoresEl = document.getElementById("clearScores");
-// var finalScoreEl = document.getElementById("score");
 var nameInputEl = document.getElementById("input-name");
 var nameSubmitButtonEl = document.getElementById("name-submit");
 var leaderboardVisible = false;
@@ -33,7 +32,6 @@ nameSubmitButtonEl.addEventListener("click", function () {
   if (userName !== "") {
     saveScore(userName, score);
     updateScoreboard();
-    // showFinalScreen();
   } else {
     alert ("Please Enter Your Name To Submit Score");
   }
@@ -53,20 +51,9 @@ optionDEl.addEventListener("click", function() {
 handleAnswer(optionDEl.textContent);
 });
 
-// document.getElementById("startbutton")
 startButtonEl.addEventListener("click", function() {
   beginQuiz();
 });
-
-// This code represents an event listener for the begin quiz button
-// var startButtonEl = document.getElementById("startbutton");
-// startButtonEl.addEventListener("click", beginQuiz);
-
-// This is an event listener for the view leaderboard link in the top nav bar of the quiz
-// var viewLeaderBoard = document.getElementById("leaderboard");
-// viewLeaderBoard.addEventListener("click", function () {
-//   displayScore();
-// });
 
 // The function below begines the quiz 
 function beginQuiz() {
@@ -78,7 +65,6 @@ function beginQuiz() {
     finalScreenEl.style.display = "none";
 }
 
-// var timerCountEl = document.getElementById("timerCount");
 var leaderboardScoresEl = document.getElementById("leaderboard-scores");
 
 function startTimer() {
@@ -113,7 +99,6 @@ function showQuestion() {
     }
   }
 
-  // var alertAnswer = "";
 
 //   The code below allows users to obtain points when the correct answer is chosen per question. The else takes off 10 seconds from the countdown if users choose any wrong answer. 
   function handleAnswer(selectedAnswer) {
@@ -184,14 +169,6 @@ const questions = [
 function endQuiz() {
     clearInterval(timer);
     document.getElementById("quiz-container").style.display = "none";
-
-    // document.getElementById("results").style.display = "block";
-    // scoreEl.textContent = "Your score: " + score;
-    // document.getElementById("input-name").classList.remove("hidden");
-    // document.getElementById("scoreButton").classList.remove("hidden");
-
-    // this code hides the "final-screen" div until the user submits their name
-    // finalScreenEl.style.display = "block";
     scoreEl.textContent = "Your score: " + score;
     showFinalScreen();
 
@@ -200,22 +177,12 @@ function endQuiz() {
   function showFinalScreen() {
     document.getElementById("results").style.display = "block";
     document.getElementById("name-submit").style.display = "block";
-    // document.getElementById("input-name").classList.add("hidden");
-    // document.getElementById("final-screen").style.display = "block";
-    // finalScreenEl.style.display = "block";
     document.getElementById("final-score").textContent = "Your final score: " + score;
     document.getElementById("input-name").classList.remove("hidden");
     document.getElementById("goBack").style.display = "block";
     document.getElementById("clearScores").style.display = "block";
-    // finalScoreEl.textContent = "Your final score: " + score;
   }
 
-  // document.getElementById("goBack").addEventListener("click", function () {
-  //   displayLeaderboard();
-    // resetQuiz();
-    // finalScreenEl.style.display = "none";
-    // document.querySelector(".start-container").style.display = "block";
-  // });
 
   function resetQuiz() {
     clearInterval(timer);
@@ -223,7 +190,6 @@ function endQuiz() {
     currentQuestion = 0;
     score = 0;
     startButtonEl.disabled = false;
-    // startTimer();
     showQuestion();
 
     document.getElementById("final-screen").style.display = "none";
@@ -232,24 +198,6 @@ function endQuiz() {
 
   }
 
-  // clearScoresEl.addEventListener("click", function () {
-  //   localStorage.clear();
-  //   displayScore();
-  //   document.getElementById("goBack").addEventListener("click", function () {
-  //     resetQuiz();
-  // });
-
-  // nameSubmitButtonEl.addEventListener("click", function () {
-  //   var userName = nameInputEl.value.trim();
-  //   if (userName !== "") {
-  //     var numericScore = parseInt(score);
-  //     saveScore(userName, score);
-  //     updateScoreboard();
-  //     showFinalScreen();
-  //   } else {
-  //     alert("Please Enter Your Name To Submit Score");
-  //   }
-  // });
 
   function saveScore(name, score) {
     var userScore = JSON.parse(localStorage.getItem("userScore") || "[]"); userScore.push({ name: name, score: score });
@@ -262,8 +210,6 @@ function endQuiz() {
     document.getElementById("results").style.display = "none";
     document.getElementById("final-screen").style.display = "block";
 
-    // var userName = nameInputEl.value.trim();
-    // var userScore = score;
     var userScoreHTML = "<h2>Your Score</h2>";
     userScore.forEach(function (player) {
       userScoreHTML += "<p>" + player.name + ": " + player.score + "</p>";
@@ -284,9 +230,7 @@ document.getElementById("goBack").addEventListener("click", function () {
   finalScreenEl.style.display = "none";
   document.querySelector(".start-container").style.display = "block";
   hideLeaderboard();
-  // timeRemaining = 60;
-  // score = 0;
-  // currentQuestion = 0;
+
 });
 
 // Event listener to clear the leaderboard scores
