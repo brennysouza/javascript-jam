@@ -209,26 +209,33 @@ function endQuiz() {
   }
 
   document.getElementById("goBack").addEventListener("click", function () {
-    resetQuiz();
-    finalScreenEl.style.display = "none";
-    document.querySelector(".start-container").style.display = "block";
+    displayLeaderboard();
+    // resetQuiz();
+    // finalScreenEl.style.display = "none";
+    // document.querySelector(".start-container").style.display = "block";
   });
 
   function resetQuiz() {
+    clearInterval(timer);
     timeRemaining = 60;
     currentQuestion = 0;
     score = 0;
-    startTimer();
+    startButtonEl.disabled = false;
+    // startTimer();
     showQuestion();
 
     document.getElementById("final-screen").style.display = "none";
     document.querySelector(".start-container").style.display = "block";
+    document.getElementById("leaderboard-scores").innerHTML = "";
+
   }
 
-  clearScoresEl.addEventListener("click", function () {
-    localStorage.clear();
-    displayScore();
-  })
+  // clearScoresEl.addEventListener("click", function () {
+  //   localStorage.clear();
+  //   displayScore();
+    document.getElementById("goBack").addEventListener("click", function () {
+      resetQuiz();
+  });
 
   // nameSubmitButtonEl.addEventListener("click", function () {
   //   var userName = nameInputEl.value.trim();
@@ -290,6 +297,20 @@ document.getElementById("leaderboard").addEventListener("click", function() {
 });
 
 function displayScore() {
+  var userScore = JSON.parse(localStorage.getItem("userScore") || "[]");
+  var leaderboardScoresEl = document.getElementById("leaderboard-scores");
+  var leaderboardHTML = "<h1>Scoreboard</h1><ul>";
+
+  userScore.forEach(function (player) {
+    leaderboardHTML += "<li>" + player.name + ": " + player.score + "</li>";
+  });
+
+  leaderboardHTML += "</ul>";
+  leaderboardScoresEl.innerHTML = leaderboardHTML;
+}
+
+// Function to display the leaderboard when the "View Leaderboard" link is clicked
+function displayLeaderboard() {
   var userScore = JSON.parse(localStorage.getItem("userScore") || "[]");
   var leaderboardScoresEl = document.getElementById("leaderboard-scores");
   var leaderboardHTML = "<h1>Scoreboard</h1><ul>";
