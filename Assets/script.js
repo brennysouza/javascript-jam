@@ -21,6 +21,8 @@ var clearScoresEl = document.getElementById("clearScores");
 // var finalScoreEl = document.getElementById("score");
 var nameInputEl = document.getElementById("input-name");
 var nameSubmitButtonEl = document.getElementById("name-submit");
+var leaderboardVisible = false;
+
 
 // The code below represents the initial time in seconds
 var timeRemaining = 60;
@@ -208,12 +210,12 @@ function endQuiz() {
     // finalScoreEl.textContent = "Your final score: " + score;
   }
 
-  document.getElementById("goBack").addEventListener("click", function () {
-    displayLeaderboard();
+  // document.getElementById("goBack").addEventListener("click", function () {
+  //   displayLeaderboard();
     // resetQuiz();
     // finalScreenEl.style.display = "none";
     // document.querySelector(".start-container").style.display = "block";
-  });
+  // });
 
   function resetQuiz() {
     clearInterval(timer);
@@ -233,9 +235,9 @@ function endQuiz() {
   // clearScoresEl.addEventListener("click", function () {
   //   localStorage.clear();
   //   displayScore();
-    document.getElementById("goBack").addEventListener("click", function () {
-      resetQuiz();
-  });
+  //   document.getElementById("goBack").addEventListener("click", function () {
+  //     resetQuiz();
+  // });
 
   // nameSubmitButtonEl.addEventListener("click", function () {
   //   var userName = nameInputEl.value.trim();
@@ -281,6 +283,7 @@ document.getElementById("goBack").addEventListener("click", function () {
   resetQuiz();
   finalScreenEl.style.display = "none";
   document.querySelector(".start-container").style.display = "block";
+  hideLeaderboard();
   // timeRemaining = 60;
   // score = 0;
   // currentQuestion = 0;
@@ -296,6 +299,25 @@ document.getElementById("leaderboard").addEventListener("click", function() {
   displayScore();
 });
 
+
+// Event listener for the "View Leaderboard" button
+document.getElementById("leaderboard").addEventListener("click", function() {
+  toggleLeaderboard();
+});
+
+// Function to toggle the leaderboard visibility
+function toggleLeaderboard() {
+  var leaderboardScoresEl = document.getElementById("leaderboard-scores");
+
+  if (leaderboardVisible) {
+    leaderboardScoresEl.innerHTML = ""; // Clear the leaderboard content
+    leaderboardVisible = false;
+  } else {
+    displayLeaderboard();
+    leaderboardVisible = true;
+  }
+}
+
 function displayScore() {
   var userScore = JSON.parse(localStorage.getItem("userScore") || "[]");
   var leaderboardScoresEl = document.getElementById("leaderboard-scores");
@@ -307,6 +329,12 @@ function displayScore() {
 
   leaderboardHTML += "</ul>";
   leaderboardScoresEl.innerHTML = leaderboardHTML;
+}
+
+function hideLeaderboard() {
+  var leaderboardScoresEl = document.getElementById("leaderboard-scores");
+  leaderboardScoresEl.innerHTML = ""; // Clear the leaderboard content
+  leaderboardVisible = false;
 }
 
 // Function to display the leaderboard when the "View Leaderboard" link is clicked
