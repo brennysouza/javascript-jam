@@ -102,7 +102,7 @@ function showQuestion() {
   }
 
 
-//   The code below allows users to obtain points when the correct answer is chosen per question. The else takes off 10 seconds from the countdown if users choose any wrong answer. 
+//   The code below allows users to obtain points when the correct answer is chosen per question. The else takes off 10 seconds from the countdown if users choose any wrong answer. The selected answer with the correct answer for the current question. If the answer is correct, it increments the score and displays a "Correct!" message for 1.5 seconds. If the answer is wrong, it deducts 10 seconds from the remaining time and displays a "Wrong!" message for 1.5 seconds.
   function handleAnswer(selectedAnswer) {
     var correctAnswer = questions[currentQuestion].answer;
     if (selectedAnswer === correctAnswer) {
@@ -167,7 +167,7 @@ const questions = [
     }
 ]
 
-// The function code will clear the timer, hide the quiz container, and show the results container with the final score. when the timer runs out or all questions are answered. 
+// The function code will clear the timer, hide the quiz container, and show the results container with the final score when the timer runs out or all questions are answered. 
 function endQuiz() {
     clearInterval(timer);
     document.getElementById("quiz-container").style.display = "none";
@@ -176,6 +176,7 @@ function endQuiz() {
 
   }
 
+// The code below displays the final score and buttons to submit i.e go back and clear scores
   function showFinalScreen() {
     document.getElementById("results").style.display = "block";
     document.getElementById("name-submit").style.display = "block";
@@ -185,7 +186,7 @@ function endQuiz() {
     document.getElementById("clearScores").style.display = "block";
   }
 
-
+// The reset quiz code below is a function that resets the quiz to its initial state and allows users to begin the quiz again
   function resetQuiz() {
     clearInterval(timer);
     timeRemaining = 60;
@@ -200,12 +201,13 @@ function endQuiz() {
 
   }
 
-
+// This code below saves the users name and score to the local storage
   function saveScore(name, score) {
     var userScore = JSON.parse(localStorage.getItem("userScore") || "[]"); userScore.push({ name: name, score: score });
     localStorage.setItem("userScore", JSON.stringify(userScore));
   }
 
+// This code below always updates the leaderboard everytime the user does the quiz again and adds their name and score to the leaderboard
   function updateScoreboard() {
     var userName = nameInputEl.value.trim();
     var userScore = JSON.parse(localStorage.getItem("userScore") || "[]"); 
@@ -226,7 +228,7 @@ function endQuiz() {
     leaderboardScoresEl.innerHTML = leaderboardHTML;
   }
 
-  // Event listener to go back to the main page and start quiz again
+// The following document.getElementById code below connects each of these to its desired html element and allows each button to work for going back to the initial screen, clearing scores, opening the leaderboard, etc. 
 document.getElementById("goBack").addEventListener("click", function () {
   resetQuiz();
   finalScreenEl.style.display = "none";
@@ -235,7 +237,6 @@ document.getElementById("goBack").addEventListener("click", function () {
 
 });
 
-// Event listener to clear the leaderboard scores
 document.getElementById("clearScores").addEventListener("click", function () {
   localStorage.removeItem("userScore");
   displayScore();
@@ -246,12 +247,11 @@ document.getElementById("leaderboard").addEventListener("click", function() {
 });
 
 
-// Event listener for the "View Leaderboard" button
 document.getElementById("leaderboard").addEventListener("click", function() {
   toggleLeaderboard();
 });
 
-// Function to toggle the leaderboard visibility
+// The following functions below all pertain to the leaderboard header link which allow users to either open the leaderboard by clicking it once and closing it by clicking it again. 
 function toggleLeaderboard() {
   var leaderboardScoresEl = document.getElementById("leaderboard-scores");
 
@@ -283,7 +283,6 @@ function hideLeaderboard() {
   leaderboardVisible = false;
 }
 
-// Function to display the leaderboard when the "View Leaderboard" link is clicked
 function displayLeaderboard() {
   var userScore = JSON.parse(localStorage.getItem("userScore") || "[]");
   var leaderboardScoresEl = document.getElementById("leaderboard-scores");
