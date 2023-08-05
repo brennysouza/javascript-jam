@@ -2,8 +2,8 @@
 // Look into functions
 // Look into conditional statements
 
+// These variables are used to store references to various HTML and CSS elements, and some are used for tracking quiz-related data.
 var startButtonEl = document.getElementById("startbutton");
-
 var timerCountEl = document.getElementById("timerCount");
 var questionEl = document.getElementById("question");
 var choicesEl = document.getElementById("choices");
@@ -11,7 +11,6 @@ var optionAEl = document.getElementById("optionA");
 var optionBEl = document.getElementById("optionB"); 
 var optionCEl = document.getElementById("optionC"); 
 var optionDEl = document.getElementById("optionD"); 
-
 var resultsEl = document.getElementById("results");
 var scoreEl = document.getElementById("score");
 var finalScreenEl = document.getElementById("final-screen");
@@ -27,6 +26,7 @@ var leaderboardVisible = false;
 var timeRemaining = 60;
 var timer; 
 
+// This code below represents the submit name button and when clicked, it calls the function that saves the user's name and score, updates the scoreboard, and displays the user's score on the final screen.
 nameSubmitButtonEl.addEventListener("click", function () {
   var userName = nameInputEl.value.trim();
   if (userName !== "") {
@@ -37,7 +37,7 @@ nameSubmitButtonEl.addEventListener("click", function () {
   }
 });
 
-// Code below adds event listeners to each choice button
+// Code below adds event listeners to each choice button. When the user clicks on a choice button, it calls the handleAnswer function with the text content of the chosen answer.
 optionAEl.addEventListener("click", function() {
 handleAnswer(optionAEl.textContent);
 });
@@ -51,11 +51,12 @@ optionDEl.addEventListener("click", function() {
 handleAnswer(optionDEl.textContent);
 });
 
+// An event listener is added to the begin quiz button so that it functions and is clickable
 startButtonEl.addEventListener("click", function() {
   beginQuiz();
 });
 
-// The function below begines the quiz 
+// The function below beginss the quiz by hiding the starting screen, displays the quiz container, starts the timer, shows the first question, resets the score to 0, and hides the final screen.
 function beginQuiz() {
     document.querySelector(".start-container").style.display = "none";
     document.getElementById("quiz-container").style.display = "block";
@@ -67,6 +68,7 @@ function beginQuiz() {
 
 var leaderboardScoresEl = document.getElementById("leaderboard-scores");
 
+// This code executes a callback function every second (1000 milliseconds) to update the countdown timer displayed on the page. When the timer gets to 0, it calls the endQuiz function.
 function startTimer() {
     timer = setInterval(function() {
       if (timeRemaining <= 0) {
@@ -82,7 +84,7 @@ function startTimer() {
 var currentQuestion = 0;
 var score = 0;
 
-// Function that displays each question with its corresponding options.
+// Function that displays each question with its corresponding options. Updates the question and choices displayed on the quiz container based on the currentQuestion index. If all questions are answered, it stops the timer, hides the quiz container, displays the final score, and shows the final screen.
 function showQuestion() {
     if (currentQuestion < questions.length) {
       questionEl.textContent = questions[currentQuestion].question;

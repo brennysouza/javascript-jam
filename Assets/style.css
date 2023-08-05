@@ -110,6 +110,7 @@ span {
     justify-content: center; /* Horizontally center its contents */
 }
 
+/* This code styles the name submit button under the name input field */
 #name-submit {
     background-color: blue;
     color: white;
@@ -119,6 +120,7 @@ span {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+/* This code styles the buttons on the last screen of the quiz */
 #goBack, #clearScores {
     background-color: blue;
     color: white;
@@ -129,6 +131,7 @@ span {
     margin: 10px;
 }
 
+/* This code styles the input name field */
 #input-name {
     height: 30px;
     border: 2px solid;
